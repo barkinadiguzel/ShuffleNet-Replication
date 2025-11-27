@@ -10,11 +10,10 @@ class DWConvLayer(nn.Module):
                 kernel_size=3,
                 stride=1,
                 padding=1,
-                groups=channels,   # depthwise
+                groups=channels,   
                 bias=False
             ),
             nn.BatchNorm2d(channels),
-            # ShuffleNet: NO ReLU here (Xception'daki gibi)
         )
 
     def forward(self, x):

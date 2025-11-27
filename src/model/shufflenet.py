@@ -5,20 +5,19 @@ from src.layers.pool_layers.maxpool_layer import MaxPoolLayer
 from src.layers.flatten_layer import FlattenLayer
 from src.layers.fc_layer import FCLayer
 from src.blocks.shufflenet_unit import ShuffleNetUnit
-from src.layers.channel_shuffle import ChannelShuffle
 
 class ShuffleNet(nn.Module):
-    def __init__(self, num_classes=1000, groups=3, width_multiplier=1.0):
+    def __init__(self, num_classes=1000, groups=3):
         super().__init__()
         self.groups = groups
         
-        # Stage output channels table (g=3 seçtik)
-        out_channels_stage2 = int(240 * width_multiplier)
-        out_channels_stage3 = int(480 * width_multiplier)
-        out_channels_stage4 = int(960 * width_multiplier)
+        # Stage output channels 
+        out_channels_stage2 = 240
+        out_channels_stage3 = 480
+        out_channels_stage4 = 960
         
         # Stem
-        self.conv1 = Conv1Layer(3, 24)
+        self.conv1 = Conv1Layer(3, 24)  # 3x3 conv, 24 channel
         self.maxpool = MaxPoolLayer(kernel_size=3, stride=2, padding=1)
         
         # Stage2
